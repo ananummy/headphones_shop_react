@@ -1,3 +1,5 @@
+import CartPage from "../CartPage";
+import MainPage from "../MainPage";
 
 const headphones = [
     {
@@ -68,4 +70,19 @@ const wirelessHeadphones = [
     }
 ]
 
-export { headphones, wirelessHeadphones };
+const NavRoutes = [
+    {
+        id: 0,
+        title: 'Main Page',
+        path: '/',
+        component: <MainPage />,
+    },
+    {
+        id: 1,
+        title: 'Cart Page',
+        path: '/cart',
+        component: <CartPage />,
+    }
+]
+
+export { headphones, wirelessHeadphones, NavRoutes };

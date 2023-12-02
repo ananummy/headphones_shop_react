@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { headphones, wirelessHeadphones } from "./data";
 import VectorRate from '../assets/svg/VectorRate.svg'
+import VectorDelete from '../assets/svg/VectorDelete.svg'
+import EllipseMinus from '../assets/svg/EllipseMinus.svg'
+import EllipsePlus from '../assets/svg/EllipsePlus.svg'
 
 export function CreateHP() {
-    const [isActive, setActive] = useState('false')
-    const handleToggle = () => {
-        setActive(!isActive);
-    };
-
     return (
         headphones.map((el, id) => (
             <div key={id} className="item">
@@ -19,7 +17,7 @@ export function CreateHP() {
                         <img src={VectorRate} alt="rate" />
                         <p>{el.rate}</p>
                     </div>
-                    <button onClick={handleToggle} className='item_button' id="id">Купить</button>
+                    <button onClick={() => AddToBasket(el)} className='item_button' id="id">Купить</button>
                 </div>
             </div>)
         )
@@ -27,11 +25,6 @@ export function CreateHP() {
 };
 
 export function CreateWHP() {
-    const [isActive, setActive] = useState('false')
-    const handleToggle = () => {
-        setActive(!isActive);
-    };
-
     return (
         wirelessHeadphones.map((el, id) => (
             <div key={id} className="item">
@@ -43,9 +36,47 @@ export function CreateWHP() {
                         <img src={VectorRate} alt="rate" />
                         <p>{el.rate}</p>
                     </div>
-                    <button onClick={handleToggle} className='item_button' id="id">Купить</button>
+                    <button onClick={() => AddToBasket(el)} className='item_button' id="id">Купить</button>
                 </div>
-            </div>)
+            </div >)
         )
     )
 };
+
+let shoppingList = [];
+function AddToBasket(el) {
+    shoppingList.push(el)
+    localStorage.setItem('el', JSON.stringify(shoppingList))
+};
+
+
+export function CreateCart() {
+    let list = JSON.parse(localStorage.getItem('el'))
+    return (
+        list ?
+            (list.map((el, id) => (
+                <div key={id} className="shopping-cart_item">
+                    <img src={el.img} alt='pic' className="card_img" />
+                    <p className="card_name">{el.title}</p>
+                    <p className="card_cost">{el.price}₽</p>
+                    <img src={VectorDelete} className="deleteBasket" alt="delete" />
+                    <div className="plusMinus">
+                        <img src={EllipseMinus} alt="minus" />
+                        <p className="cart_count">1</p>
+                        <img src={EllipsePlus} alt="plus" />
+                    </div>
+                </div>
+            ))) : <div>пусто</div>
+    )
+};
+
+export const FinalCheck = () => {
+    let list = JSON.parse(localStorage.getItem('el'))
+    let sum = 0;
+    if (list) {
+        list.map((el) => (
+            sum += el.price
+        ))
+    }
+    return sum;
+}

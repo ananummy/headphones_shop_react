@@ -47,14 +47,10 @@ li {
     list-style: none;
 }
 
-// a {
-//     text-decoration: none;
-//     .logo {
-//         @include fonts(700, 25px, 30px);
-//         color: $main-font-color;
-//         cursor: pointer;
-//     }
-// }
+a {
+    text-decoration: none;
+}
+
 .logo {
     @include fonts(700, 25px, 30px);
     color: $main-font-color;
@@ -65,15 +61,15 @@ li {
     height: 60px;
     @include flexbox(row, space-between, center);
     ul {
-        @include flexbox(row, space-around, center);
+        @include flexbox(row, space-around, flex-end);
         margin: 0;
         padding: 0;
         width: 120px;
     }
 }
 
-.basket,
-.favorite {
+.favorite,
+.basket {
     height: 60px;
     width: 60px;
     position: relative;

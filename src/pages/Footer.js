@@ -8,7 +8,7 @@ import './styles/style.scss';
 function Footer() {
     return (
         <div className="Footer container">
-            <div className="logo">QPICK</div>
+            <div className="logo">SHOP</div>
             <div className="links">
                 <nav>
                     <ul>
