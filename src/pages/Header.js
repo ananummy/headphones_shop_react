@@ -6,28 +6,16 @@ import VectorBasket from './assets/svg/VectorBasket.svg';
 import './styles/style.scss';
 
 function Header() {
-    // let elList = 0
-    // const [buy, setBuy] = useState(false);
+
     const [count, setCount] = useState(0);
-    // JSON.parse(localStorage.getItem('el')) ? elList = JSON.parse(localStorage.getItem('el')).length : elList = 0;
-    // console.log(elList);
-    let list = JSON.parse(localStorage.getItem('el'))
 
     useEffect(() => {
-        if (list)
-            setCount(list.length)
-        document.title = `${count}`;
-    }, [list, count]);
 
-    // setCount()
+        setCount(JSON.parse(localStorage.getItem('count')))
 
-    // if (JSON.parse(localStorage.getItem('el'))) {
-    //     setCount(JSON.parse(localStorage.getItem('el')).length);
-    //     console.log(count);
-    //     // console.log(JSON.parse(localStorage.getItem('el')));
-    //     // setBuy(true);
-    //     // setCount(`${JSON.parse(localStorage.getItem('el')).length}`)
-    // }
+    }, [count]);
+
+
 
     return (
         <div className='Header container'>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { headphones, wirelessHeadphones } from "./data";
 import VectorRate from '../assets/svg/VectorRate.svg'
 import VectorDelete from '../assets/svg/VectorDelete.svg'
@@ -6,6 +6,7 @@ import EllipseMinus from '../assets/svg/EllipseMinus.svg'
 import EllipsePlus from '../assets/svg/EllipsePlus.svg'
 
 export function CreateHP() {
+
     return (
         headphones.map((el, id) => (
             <div key={id} className="item">
@@ -25,6 +26,7 @@ export function CreateHP() {
 };
 
 export function CreateWHP() {
+
     return (
         wirelessHeadphones.map((el, id) => (
             <div key={id} className="item">
@@ -38,19 +40,25 @@ export function CreateWHP() {
                     </div>
                     <button onClick={() => AddToBasket(el)} className='item_button' id="id">Купить</button>
                 </div>
-            </div >)
+            </div>)
         )
     )
 };
 
 let shoppingList = [];
-function AddToBasket(el) {
+export const AddToBasket = (el) => {
     shoppingList.push(el)
+    localStorage.setItem('count', JSON.stringify(shoppingList.length))
     localStorage.setItem('el', JSON.stringify(shoppingList))
 };
 
 
+
 export function CreateCart() {
+    // const DelereCard = () => {
+    //     localStorage.removeItem('el')
+
+    // }
     let list = JSON.parse(localStorage.getItem('el'))
     return (
         list ?
@@ -69,6 +77,7 @@ export function CreateCart() {
             ))) : <div>пусто</div>
     )
 };
+
 
 export const FinalCheck = () => {
     let list = JSON.parse(localStorage.getItem('el'))
